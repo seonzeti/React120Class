@@ -9,12 +9,16 @@ const app = express();
 const indexRouter = require("./routes");
 const bodyParser = require("body-parser");
 const path = require("path");
+let cors = require("cors");
+
+app.use(express.json());
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, "react-project", "build")));
 
 app.set("port", process.env.PORT || 8888);
-app.use("/", indexRouter);
 
+app.use("/", indexRouter);
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 port에서 대기 중...");
 });
