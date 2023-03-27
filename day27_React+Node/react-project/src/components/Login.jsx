@@ -1,7 +1,7 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 
 import React, { useRef } from "react";
-import axios from "axios";
+import axios from "../axios";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const idRef = useRef();
@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     console.log("handle Login");
     axios
-      .post("http://localhost:8888/login", {
+      .post("/login", {
         id: idRef.current.value,
         pw: pwRef.current.value,
       })

@@ -1,6 +1,6 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
-import React, { useRef, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "../axios";
 import { useNavigate } from "react-router-dom";
 
 const Join = () => {
@@ -12,6 +12,7 @@ const Join = () => {
 
   const [userData, setUserData] = useState({});
 
+  useEffect(() => {}, [userData]);
   const handleJoin = (e) => {
     e.preventDefault();
     setUserData({
@@ -19,28 +20,33 @@ const Join = () => {
       pw: pwRef.current.value,
       add: addRef.current.value,
     });
-
-    axios
-      .post("http://localhost:8888/join", {
-        user: userData,
-      })
-      .then((res) => {
-        console.log(res.data.result);
-        if (res.data.result === "success") {
-          alert("회원가입에 성공하셨습니다!");
-          navigate("/");
-        } else {
-          alert("회원가입에 실패하셨습니다.");
-          navigate("/join");
-          idRef.current.value = "";
-          pwRef.current.value = "";
-          addRef.current.value = "";
-        }
-      })
-      .catch(() => {
-        console.log("Failed to Join");
-      });
   };
+
+  useEffect(() => {
+    console.log("userData change", userData.id);
+
+    userData.id !== undefined &&
+      axios
+        .post("/join", {
+          user: userData,
+        })
+        .then((res) => {
+          console.log(res.data.result);
+          if (res.data.result === "success") {
+            alert("회원가입에 성공하셨습니다!");
+            navigate("/");
+          } else {
+            alert("회원가입에 실패하셨습니다.");
+            navigate("/join");
+            idRef.current.value = "";
+            pwRef.current.value = "";
+            addRef.current.value = "";
+          }
+        })
+        .catch(() => {
+          console.log("Failed to Join");
+        });
+  }, [userData]);
 
   return (
     <div>
