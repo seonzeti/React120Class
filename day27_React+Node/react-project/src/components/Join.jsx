@@ -35,9 +35,14 @@ const Join = () => {
           if (res.data.result === "success") {
             alert("회원가입에 성공하셨습니다!");
             navigate("/");
-          } else {
+          } else if (res.data.result === "failed") {
             alert("회원가입에 실패하셨습니다.");
             navigate("/join");
+            idRef.current.value = "";
+            pwRef.current.value = "";
+            addRef.current.value = "";
+          } else if (res.data.result === "dup") {
+            alert("사용할 수 없는 아이디 입니다.");
             idRef.current.value = "";
             pwRef.current.value = "";
             addRef.current.value = "";
