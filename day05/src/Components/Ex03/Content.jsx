@@ -11,7 +11,7 @@ const Content = () => {
         color: isDark ? "white" : "black",
       }}
     >
-      <h1>홍길동님 좋은 하루 보내세요!</h1>
+      <h1>지각하지 않기! 결석하지 않기!</h1>
     </div>
   );
 };
