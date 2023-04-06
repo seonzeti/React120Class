@@ -1,21 +1,27 @@
 import React, { useState } from "react";
-import Content from "../Components/Ex03/Content";
-import Footer from "../Components/Ex03/Footer";
-import Header from "../Components/Ex03/Header";
-import { ThemeContext } from "../context/ThemeContext";
+import ColorList from "../Components/Ex03/ColorList";
+import ColorResult from "../Components/Ex03/ColorResult";
+
+import { ColorContext } from "../context/ColorContext";
 
 const Ex03 = () => {
-  // 우리 App의 Theme에 관련된 데이터 => 전역적으로 사용해야하는 데이터
-  const [isDark, setIsDark] = useState(false);
+  const [choiceColor, setChoiceColor] = useState("hello");
 
+  let containerStyle = {
+    margin: "2%",
+  };
   return (
-    <ThemeContext.Provider value={{ isDark, setIsDark }}>
-      <div className="page">
-        <Header />
-        <Content />
-        <Footer />
+    <ColorContext.Provider value={{ setChoiceColor, choiceColor }}>
+      <div style={containerStyle}>
+        <h1>색상 변경하기</h1>
+        <ColorList />
+        <br />
+        <hr></hr>
+        <br />
+        <h1>바꾼 색상</h1>
+        <ColorResult />
       </div>
-    </ThemeContext.Provider>
+    </ColorContext.Provider>
   );
 };
 

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ColorContext } from "../../context/ColorContext";
 
-const ColorList = ({ setChoiceColor }) => {
+const ColorList = () => {
+  const { setChoiceColor } = useContext(ColorContext);
   let color = ["red", "orange", "yellow", "green", "blue"];
 
   const ck = (e) => {
