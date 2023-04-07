@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../context/Ex04ThemeContext";
 
 const Footer = () => {
   const { isDark, setIsDark } = useContext(ThemeContext);

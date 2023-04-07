@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../context/Ex04ThemeContext";
 
 const Header = () => {
   const { isDark } = useContext(ThemeContext);
@@ -7,7 +7,7 @@ const Header = () => {
     <header
       className="header"
       style={{
-        backgroundColor: isDark ? "black" : "lightgray",
+        backgroundColor: isDark ? "black" : "skyblue",
         color: isDark ? "white" : "black",
       }}
     >

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { ColorContext } from "../../context/ColorContext";
+import { ColorContext } from "../../context/Ex03ColorContext";
 
 const ColorResult = () => {
   const { choiceColor } = useContext(ColorContext);

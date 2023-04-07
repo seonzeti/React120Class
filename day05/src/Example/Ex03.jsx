@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ColorList from "../Components/Ex03/ColorList";
 import ColorResult from "../Components/Ex03/ColorResult";
 
-import { ColorContext } from "../context/ColorContext";
+import { ColorContext } from "../context/Ex03ColorContext";
 
 const Ex03 = () => {
   const [choiceColor, setChoiceColor] = useState("hello");
@@ -18,7 +18,7 @@ const Ex03 = () => {
         <br />
         <hr></hr>
         <br />
-        <h1>바꾼 색상</h1>
+        <h1>선택한 색상</h1>
         <ColorResult />
       </div>
     </ColorContext.Provider>

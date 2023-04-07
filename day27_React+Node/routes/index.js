@@ -52,6 +52,21 @@ router.get("/list", (req, res) => {
   });
 });
 
+router.post("/write", (req, res) => {
+  console.log("write Function");
+  let sql = "insert into write_list values (?,?);";
+  console.log(req.body.content.title, req.body.content.content);
+  conn.query(
+    sql,
+    [req.body.content.title, req.body.content.content],
+    (err, rows) => {
+      if (rows) {
+        console.log("게시물 등록 성공!");
+      }
+    }
+  );
+});
+
 router.get("/", () => {
   res.sendFile(path.join(__dirname, "react-project", "build", "index.html"));
 });
