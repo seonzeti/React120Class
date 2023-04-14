@@ -10,11 +10,10 @@ const MemberList = () => {
     axios
       .get("/list")
       .then((res) => {
-        console.log(res.data);
         setList(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
       });
   }, []);
 

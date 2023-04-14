@@ -1,8 +1,23 @@
-import React from "react";
+import axios from "../axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BoardContext } from "../context/BoardContext";
 const Board = () => {
-  console.log("session", sessionStorage.getItem("loginID"));
+  const { list, setList, detailNum, setDetailNum } = useContext(BoardContext);
+
+  const nav = useNavigate();
+  useEffect(() => {
+    axios
+      .get("/getPost")
+      .then((res) => {
+        setList(res.data.list);
+      })
+      .catch((err) => {
+        // console.error(err);
+      });
+  }, []);
+
   return (
     <div>
       <Table striped bordered hover>
@@ -15,12 +30,23 @@ const Board = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>혹시 저랑 페스티벌 가실 분 구합니다.</td>
-            <td>김광주</td>
-            <td>2023.04.04</td>
-          </tr>
+          {list.length > 0 &&
+            list.map((item, idx) => {
+              return (
+                <tr
+                  key={item.num + idx}
+                  onClick={(e) => {
+                    setDetailNum(e.target.parentNode.firstChild.innerText);
+                    nav("/detail");
+                  }}
+                >
+                  <td>{idx + 1}</td>
+                  <td>{item.title}</td>
+                  <td>{item.userId}</td>
+                  <td>{item.write_date}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </Table>
 

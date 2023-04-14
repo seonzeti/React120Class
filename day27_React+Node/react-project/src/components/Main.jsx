@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 
 const Main = () => {
-  useEffect(() => {
-    console.log("session Storage : ", sessionStorage.getItem("loginID"));
-  }, []);
   return (
     <div>
       {sessionStorage.getItem("loginID") !== null ? (

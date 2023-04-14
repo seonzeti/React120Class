@@ -1,31 +1,41 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "../axios";
+import { useNavigate } from "react-router-dom";
 
 const Write = () => {
+  const navigate = useNavigate();
   let titleRef = useRef();
   let contentRef = useRef();
   let [newContent, setNewContent] = useState({});
+
   const handleWrite = (e) => {
     e.preventDefault();
-    console.log("handle Write Function", titleRef.current.value);
     setNewContent({
       title: titleRef.current.value,
       content: contentRef.current.value,
+      name: sessionStorage.getItem("loginID"),
     });
   };
 
   useEffect(() => {
-    axios
-      .post("/write", {
-        content: newContent,
-      })
-      .then(() => {
-        console.log("success");
-      })
-      .catch(() => {
-        console.log("error");
-      });
+    if (newContent.title != undefined) {
+      axios
+        .post("/addPost", {
+          content: newContent,
+        })
+        .then((res) => {
+          if (res.data.result === "success") {
+            alert("등록이 완료 되었습니다!");
+            navigate("/board");
+          } else {
+            alert("ERROR!");
+          }
+        })
+        .catch(() => {
+          // console.error("error");
+        });
+    }
   }, [newContent]);
 
   return (
@@ -52,7 +62,14 @@ const Write = () => {
           <Button variant="primary" size="lg" type="submit">
             글쓰기
           </Button>
-          <Button variant="secondary" size="lg">
+
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => {
+              navigate("/board");
+            }}
+          >
             목록
           </Button>
         </div>

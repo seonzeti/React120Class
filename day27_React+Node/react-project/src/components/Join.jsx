@@ -23,15 +23,12 @@ const Join = () => {
   };
 
   useEffect(() => {
-    console.log("userData change", userData.id);
-
     userData.id !== undefined &&
       axios
         .post("/join", {
           user: userData,
         })
         .then((res) => {
-          console.log(res.data.result);
           if (res.data.result === "success") {
             alert("회원가입에 성공하셨습니다!");
             navigate("/");
@@ -49,7 +46,7 @@ const Join = () => {
           }
         })
         .catch(() => {
-          console.log("Failed to Join");
+          // console.error("Failed to Join");
         });
   }, [userData]);
 

@@ -11,14 +11,12 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("handle Login");
     axios
       .post("/login", {
         id: idRef.current.value,
         pw: pwRef.current.value,
       })
       .then((res) => {
-        console.log("login result :", res.data.result);
         if (res.data.result === "success") {
           // 세션 저장소에 저장 (브라우저를 껐다 키면 사라지는 반휘발성 데이터)
           sessionStorage.setItem("loginID", idRef.current.value);
@@ -31,7 +29,7 @@ const Login = () => {
         }
       })
       .catch(() => {
-        console.log("error");
+        // console.error("error");
       });
   };
   return (
